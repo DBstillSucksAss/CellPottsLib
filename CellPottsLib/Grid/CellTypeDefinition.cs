@@ -93,5 +93,31 @@ namespace CellPottsLib.Grid
             EnergyFactors.Add("volume", Registry.VolumeFactor);
             EnergyFactors.Add("circumference", Registry.CircumferenceFactor);
         }
+
+        public bool Contains(int identity)
+        {
+            return identity >= IdentityMin && identity <= IdentityMax;
+        }
+
+        public bool IntersectsWith(CellTypeDefinition typeDefinition)
+        {
+            if(typeDefinition.IdentityMin >= IdentityMin && typeDefinition.IdentityMin <= IdentityMax)
+            {
+                return true;
+            }
+            if (typeDefinition.IdentityMax >= IdentityMin && typeDefinition.IdentityMax <= IdentityMax)
+            {
+                return true;
+            }
+            if(typeDefinition.IdentityMin >= IdentityMin && typeDefinition.IdentityMax <= IdentityMax)
+            {
+                return true;
+            }
+            if (typeDefinition.IdentityMin <= IdentityMin && typeDefinition.IdentityMax >= IdentityMax)
+            {
+                return true;
+            }
+            return false;
+        }
     } 
 }

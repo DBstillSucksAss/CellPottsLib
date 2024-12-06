@@ -11,7 +11,13 @@ namespace CellPottsLib.DataStructs
     {
         public int Identity { get; private set; }
         public List<IntVector2D> Positions { get; private set; }
-        public int? Volume { get; set; } = null;
+        public int Volume
+        {
+            get
+            {
+                return Positions.Count;
+            }
+        }
         public int? Circumference { get; set; } = null;
 
         public Cell(int identity, List<IntVector2D> positions)
@@ -37,5 +43,26 @@ namespace CellPottsLib.DataStructs
         {
             Positions.Remove(position);
         }
-    }
+
+        //TODO : TEST that shit
+        private void CalculateCircumference()
+        {
+            int circumference = 0;
+            foreach (IntVector2D pos in Positions)
+            {
+                List<IntVector2D> neighbours = new List<IntVector2D>();
+                neighbours.Add(new IntVector2D(pos.x + 1, pos.y));
+                neighbours.Add(new IntVector2D(pos.x - 1, pos.y));
+                neighbours.Add(new IntVector2D(pos.x, pos.y + 1));
+                neighbours.Add(new IntVector2D(pos.x, pos.y - 1));
+                foreach (IntVector2D neighbour in neighbours)
+                {
+                    if (!Positions.Contains(neighbour))
+                    {
+                        circumference++;
+                    }
+                }
+            }
+            Circumference = circumference;
+        }
 }

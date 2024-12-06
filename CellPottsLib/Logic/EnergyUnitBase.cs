@@ -25,7 +25,7 @@ namespace CellPottsLib.Logic
         {
             PotentialMaxEnergyChange = 0;
         }
-        public void EnableNormalization(double maxEnergyDifference)
+        public void SetNormalization(double maxEnergyDifference)
         {
             PotentialMaxEnergyChange = maxEnergyDifference;
         }
