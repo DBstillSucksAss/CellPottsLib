@@ -44,8 +44,9 @@ namespace CellPottsLib.DataStructs
         {
             return a.x != b.x || a.y != b.y;
         }
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj )
         {
+            if (obj == null) { return false; }
             if (obj is IntVector2D)
             {
                 IntVector2D v = (IntVector2D)obj;

@@ -11,7 +11,7 @@ namespace CellPottsLib.Logic
         public IEnergyCalculator EnergyCalculator { get; private set; }
         private List<ILogicUnit> LogicUnits;
 
-        LogicHandler(EnergyCalculator? energyCalculator = null)
+        public LogicHandler(EnergyCalculator? energyCalculator = null)
         {
             LogicUnits = new List<ILogicUnit>();
             EnergyCalculator = energyCalculator ?? new EnergyCalculator();

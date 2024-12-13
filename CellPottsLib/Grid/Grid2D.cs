@@ -15,7 +15,7 @@ namespace CellPottsLib.Grid
         private List<CellTypeDefinition> cellTypes;
         private int[,] grid;
 
-        private Grid2D(IntVector2D size, List<CellTypeDefinition>? typeDefonitions = null)
+        public Grid2D(IntVector2D size, List<CellTypeDefinition>? typeDefonitions = null)
         {
             grid = new int[size.x, size.y];
             cellTypes = typeDefonitions ?? new List<CellTypeDefinition>(cellTypes);
@@ -24,6 +24,7 @@ namespace CellPottsLib.Grid
         public I2DGrid Clone()
         {
             Grid2D newGrid = new Grid2D(GridSize);
+            throw new NotImplementedException();
             
         }
 
