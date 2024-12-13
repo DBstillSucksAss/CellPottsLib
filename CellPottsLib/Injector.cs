@@ -20,7 +20,7 @@ namespace CellPottsLib
 
         public virtual IMoveHandler GetMoveHandler()
         {
-            throw new NotImplementedException();
+            return new MoveHandler();
         }
 
         public virtual ILogicHandler GetLogicHandler()

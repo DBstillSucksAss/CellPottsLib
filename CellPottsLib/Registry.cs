@@ -16,6 +16,7 @@ namespace CellPottsLib
         public static double DefaultAdhesiveCellBoundary { get; set; } = 1.5f;
         public static double VolumeFactor { get; set; } = 1.0f;
         public static double CircumferenceFactor { get; set; } = 1.0f;
+        public static string LogPath { get; set; } = "";
 
     }
 }

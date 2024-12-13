@@ -66,4 +66,5 @@ namespace CellPottsLib.DataStructs
             }
             circumference = newCircumference;
         }
+    }
 }

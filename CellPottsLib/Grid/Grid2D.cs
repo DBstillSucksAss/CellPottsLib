@@ -19,7 +19,14 @@ namespace CellPottsLib.Grid
         public Grid2D(IntVector2D size, List<CellTypeDefinition>? typeDefonitions = null)
         {
             grid = new int[size.x, size.y];
-            cellTypes = typeDefonitions ?? new List<CellTypeDefinition>(cellTypes);
+            if(typeDefonitions == null)
+            {
+                cellTypes = new List<CellTypeDefinition>();
+            }
+            else
+            {
+                cellTypes = typeDefonitions;
+            }
             UsedIdentitys = new();
         }
 
@@ -27,6 +34,7 @@ namespace CellPottsLib.Grid
         {
             Grid2D newGrid = new Grid2D(GridSize,cellTypes);
             newGrid.SetUsedIdentitys(UsedIdentitys);
+            newGrid.grid = (int[,])grid.Clone();
             return newGrid;
         }
 
@@ -119,7 +127,7 @@ namespace CellPottsLib.Grid
 
         public void SetPixel(int x, int y, int value)
         {
-            if(!UsedIdentitys.Contains(value))
+            if(!UsedIdentitys.Contains(value) && value != Registry.BackgroundIdentity)
             {
                 UsedIdentitys.Add(value);
             }
@@ -145,6 +153,10 @@ namespace CellPottsLib.Grid
             List<Cell> cells = new List<Cell>();
             foreach (int identity in UsedIdentitys)
             {
+                if(identity == Registry.BackgroundIdentity)
+                {
+                    continue;
+                }
                 Cell? tempcell = GetCell(identity);
                 if (tempcell != null)
                 {

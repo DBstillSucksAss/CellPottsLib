@@ -89,7 +89,8 @@ namespace CellPottsLib.Logic.Units
                 {
                     throw new ArgumentException($"Cell {cell.Identity} has no CellType");
                 }
-                energy += Math.Pow((grid.GetCellType(cell.Identity).TargetVolume - cell.Volume), 2);
+                double targetVolume = grid.GetCellType(cell.Identity).TargetVolume;
+                energy += Math.Pow((targetVolume - cell.Volume), 2);
             }
 
             return energy;

@@ -39,7 +39,10 @@ namespace CellPottsLib.Logic
             double energy = energyCalculator.CalculateEnergyChange(grid, move.Target, grid.GetPixel(move.Source));
 
             bool IsValid = false;
-            if(energy <= 0) { IsValid = true; }
+            if(energy <= 0) 
+            { 
+                IsValid = true; 
+            }
             else
             {
                 double random = new Random().NextDouble();
