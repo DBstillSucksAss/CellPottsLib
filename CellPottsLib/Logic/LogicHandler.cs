@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CellPottsLib.Grid;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,28 @@ namespace CellPottsLib.Logic
         public void SetEnergyCalculator(IEnergyCalculator calculator)
         {
             EnergyCalculator = calculator;
+        }
+
+        public void UpdateBeforeMoves(I2DGrid grid)
+        {
+            foreach (ILogicUnit unit in LogicUnits)
+            {
+                if (unit.Type == LogicUnitType.Cell)
+                {
+                    ((CellUpdateUnitBase)unit).UpdateStartTimeStep(grid);
+                }
+            }
+        }
+
+        public void UpdateAfterMoves(I2DGrid grid)
+        {
+            foreach (ILogicUnit unit in LogicUnits)
+            {
+                if (unit.Type == LogicUnitType.Cell)
+                {
+                    ((CellUpdateUnitBase)unit).UpdateEndTimeStep(grid);
+                }
+            }
         }
     }
 }

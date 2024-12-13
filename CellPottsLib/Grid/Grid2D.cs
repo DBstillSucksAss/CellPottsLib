@@ -13,19 +13,21 @@ namespace CellPottsLib.Grid
         public IntVector2D GridSize => new IntVector2D(grid.GetLength(0),grid.GetLength(1));
 
         private List<CellTypeDefinition> cellTypes;
+        private List<int> UsedIdentitys;
         private int[,] grid;
 
         public Grid2D(IntVector2D size, List<CellTypeDefinition>? typeDefonitions = null)
         {
             grid = new int[size.x, size.y];
             cellTypes = typeDefonitions ?? new List<CellTypeDefinition>(cellTypes);
+            UsedIdentitys = new();
         }
 
         public I2DGrid Clone()
         {
-            Grid2D newGrid = new Grid2D(GridSize);
-            throw new NotImplementedException();
-            
+            Grid2D newGrid = new Grid2D(GridSize,cellTypes);
+            newGrid.SetUsedIdentitys(UsedIdentitys);
+            return newGrid;
         }
 
         public void DefineCellType(CellTypeDefinition typeDefinition)
@@ -46,6 +48,10 @@ namespace CellPottsLib.Grid
 
         public Cell? GetCell(int identity)
         {
+            if(!UsedIdentitys.Contains(identity))
+            {
+                return null;
+            }
             List<IntVector2D> cells = new List<IntVector2D>();
             for (int x = 0; x < grid.GetLength(0); x++)
             {
@@ -56,10 +62,6 @@ namespace CellPottsLib.Grid
                         cells.Add(new IntVector2D(x, y));
                     }
                 }
-            }
-            if (cells.Count == 0)
-            {
-                return null;
             }
             return new Cell(identity, cells);
         }
@@ -117,12 +119,44 @@ namespace CellPottsLib.Grid
 
         public void SetPixel(int x, int y, int value)
         {
+            if(!UsedIdentitys.Contains(value))
+            {
+                UsedIdentitys.Add(value);
+            }
             grid[x, y] = value;
         }
 
         public void SetPixel(IntVector2D pos, int value)
         {
+            if (!UsedIdentitys.Contains(value))
+            {
+                UsedIdentitys.Add(value);
+            }
             grid[pos.x, pos.y] = value;
+        }
+
+        public void SetUsedIdentitys(List<int> usedIdentitys)
+        {
+            UsedIdentitys = usedIdentitys;
+        }
+
+        public List<Cell> GetCells()
+        {
+            List<Cell> cells = new List<Cell>();
+            foreach (int identity in UsedIdentitys)
+            {
+                Cell? tempcell = GetCell(identity);
+                if (tempcell != null)
+                {
+                    cells.Add((Cell)tempcell);
+                }
+            }
+            return cells;
+        }
+
+        public List<int> GetIdentitys()
+        {
+            return UsedIdentitys;
         }
     }
 }

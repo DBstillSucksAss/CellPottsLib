@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CellPottsLib.DataStructs
 {
-    public struct Cell
+    public class Cell
     {
         public int Identity { get; private set; }
         public List<IntVector2D> Positions { get; private set; }
@@ -18,8 +18,9 @@ namespace CellPottsLib.DataStructs
                 return Positions.Count;
             }
         }
-        public int? Circumference { get; set; } = null;
+        public int Circumference { get { CalculateCircumference(); return circumference; } }
 
+        private int circumference;
         public Cell(int identity, List<IntVector2D> positions)
         {
             Identity = identity;
@@ -47,7 +48,7 @@ namespace CellPottsLib.DataStructs
         //TODO : TEST that shit
         private void CalculateCircumference()
         {
-            int circumference = 0;
+            int newCircumference = 0;
             foreach (IntVector2D pos in Positions)
             {
                 List<IntVector2D> neighbours = new List<IntVector2D>();
@@ -59,10 +60,10 @@ namespace CellPottsLib.DataStructs
                 {
                     if (!Positions.Contains(neighbour))
                     {
-                        circumference++;
+                        newCircumference++;
                     }
                 }
             }
-            Circumference = circumference;
+            circumference = newCircumference;
         }
 }

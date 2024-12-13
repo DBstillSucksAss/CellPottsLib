@@ -13,6 +13,8 @@ namespace CellPottsLib.Grid
         public IntVector2D GridSize { get; }
         public I2DGrid Clone();
         public Cell? GetCell(int identity);
+        public List<Cell> GetCells();
+        public List<int> GetIdentitys();
         public void DefineCellType(CellTypeDefinition typeDefinition);
         public CellTypeDefinition GetCellType(int identity);
         public void SetPixel(int x, int y, int value);

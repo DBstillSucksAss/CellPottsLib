@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellPottsLib", "CellPottsLib\CellPottsLib.csproj", "{FA4EB8CB-63F2-4FD6-92FC-A4EF34570FC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CellPottsLib", "CellPottsLib\CellPottsLib.csproj", "{FA4EB8CB-63F2-4FD6-92FC-A4EF34570FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellLibTest", "CellLibTest\CellLibTest.csproj", "{500F0237-23A9-4B97-9421-0FA69B5BD279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FA4EB8CB-63F2-4FD6-92FC-A4EF34570FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA4EB8CB-63F2-4FD6-92FC-A4EF34570FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA4EB8CB-63F2-4FD6-92FC-A4EF34570FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{500F0237-23A9-4B97-9421-0FA69B5BD279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{500F0237-23A9-4B97-9421-0FA69B5BD279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{500F0237-23A9-4B97-9421-0FA69B5BD279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{500F0237-23A9-4B97-9421-0FA69B5BD279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

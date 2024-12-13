@@ -44,9 +44,14 @@ namespace CellPottsLib
 
         private void OneStep()
         {
-            Move move = moveHandler.GenerateMove(grid);
-            moveHandler.ValidateMove(move, grid, logic.EnergyCalculator);
-            moveHandler.ApplyMove(move, grid);
+            logic.UpdateBeforeMoves(grid);
+            for (int i = 0; i < (grid.GridSize.x -1) * (grid.GridSize.y -1); i++ )
+            {
+                Move move = moveHandler.GenerateMove(grid);
+                moveHandler.ValidateMove(move, grid, logic.EnergyCalculator);
+                moveHandler.ApplyMove(move, grid);
+            }
+            logic.UpdateAfterMoves(grid);
         }
     }
 }

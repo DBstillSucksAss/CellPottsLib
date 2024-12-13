@@ -10,14 +10,14 @@ namespace CellPottsLib.Logic
 {
     public abstract class EnergyUnitBase : ILogicUnit
     {
-        public string ID { get; private set; }
-        public LogicUnitType Type { get; private set; }
+        public virtual string ID { get; private set; }
+        public LogicUnitType Type { get { return LogicUnitType.EnergyCalculator; } }
         public double PotentialMaxEnergyChange { get; set; } = 0;
+        public double Weighting { get; set; } = 1;
 
-        public EnergyUnitBase(string ID, LogicUnitType type)
+        public EnergyUnitBase(string iD)
         {
-            this.ID = ID;
-            this.Type = LogicUnitType.EnergyCalculator;
+            iD = ID;
         }
 
 
@@ -32,6 +32,7 @@ namespace CellPottsLib.Logic
         public abstract double CalculateEnergy(I2DGrid grid);
         public abstract double CalculateEnergyChange(I2DGrid grid, IntVector2D position, int newState);
         public abstract double CalculateEnergyChange(I2DGrid OldGrid, I2DGrid newGrid);
+        public abstract double CalculateEnergyChange(I2DGrid OldGrid, Move move);
 
     }
 }

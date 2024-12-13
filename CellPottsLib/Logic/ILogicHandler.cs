@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CellPottsLib.Grid;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace CellPottsLib.Logic
         public void RemoveLogicUnit(string ID, LogicUnitType type);
         public ILogicUnit? GetLogicUnit(string ID, LogicUnitType type);
         public List<ILogicUnit> GetLogicUnits();
+        public void UpdateBeforeMoves(I2DGrid grid);
+        public void UpdateAfterMoves(I2DGrid grid);
     }
 }
