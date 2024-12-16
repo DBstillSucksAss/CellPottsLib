@@ -8,7 +8,15 @@ namespace CellPottsLib
 {
     public interface ILogger
     {
+        public Logtype LogType { get; set; }
         public void Log(string message, object Sender);
         public void SetLogPath(string path);
+
+    }
+
+    public enum Logtype
+    {
+        txt,
+        json
     }
 }

@@ -11,6 +11,7 @@ namespace CellPottsLib.Logic
     public interface IEnergyCalculator
     {
         public double CalculateEnergy(I2DGrid grid);
+        public double CalculateEnergyChange(I2DGrid grid,Move move);
         public double CalculateEnergyChange(I2DGrid grid, IntVector2D position, int newState);
         public double CalculateEnergyChange(I2DGrid OldGrid, I2DGrid newGrid);
         public void EnableNormalizationAllUnits();

@@ -2,6 +2,7 @@
 using CellPottsLib.DataStructs;
 using CellPottsLib.Grid;
 using CellPottsLib.Grid.CellTypes;
+using CellPottsLib.Logging;
 using CellPottsLib.Logic;
 using CellPottsLib.Logic.Units;
 
@@ -21,7 +22,7 @@ namespace CellLibTest
             sim.Grid.SetPixel(new IntVector2D(6, 4), 1);
 
             DrawGrid(sim.Grid);
-            Logger.SetLogPath("C:\\Users\\seege\\Source\\Repos\\DBstillSucksAss\\CellPottsLib\\CellPottsLib\\log.txt");
+            Logger.SetLogPath("C:\\Users\\seege\\Source\\Repos\\DBstillSucksAss\\CellPottsLib\\CellPottsLib\\log.json");
             Logger.Clearlog();
             Console.ReadKey();
 
@@ -29,8 +30,9 @@ namespace CellLibTest
             {
                 Timestep(sim);
                 Thread.Sleep(10);
-                Logger.Log($"Step {i} done.   Volume: {sim.Grid.GetCell(1).Volume}" , sim);
+                //Logger.Log($"Step {i} done.   Volume: {sim.Grid.GetCell(1).Volume}" , sim);
             }
+            Logger.FinalizeLog();
             Console.ReadKey();
         }
 

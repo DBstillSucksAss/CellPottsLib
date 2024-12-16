@@ -12,12 +12,16 @@ namespace CellPottsLib
         private IMoveHandler moveHandler;
 
 
-        public Simulation(IntVector2D size)
+        public Simulation(IntVector2D size, string? logpath = null)
         {
             Injector inj = new Injector();
             grid = inj.Get2DGrid(size);
             logic = inj.GetLogicHandler();
             moveHandler = inj.GetMoveHandler();
+            if(logpath != null)
+            {
+                Registry.LogPath = logpath;
+            }
         }
         public I2DGrid Grid { get {  return grid; } }
 

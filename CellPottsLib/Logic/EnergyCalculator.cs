@@ -36,11 +36,25 @@ namespace CellPottsLib.Logic
             return Energy;
         }
 
+
+        public double CalculateEnergyChange(I2DGrid grid, Move move)
+        {
+            double EnergyChange = 0;
+            foreach (EnergyUnitBase unit in EnergyUnits)
+            {
+                EnergyChange += unit.CalculateEnergyChange(grid, move);
+            }
+            return EnergyChange;
+        }
+
         public double CalculateEnergyChange(I2DGrid grid, IntVector2D position, int newState)
         {
-            I2DGrid newGrid = grid.Clone();
-            newGrid.SetPixel(position, newState);
-            return CalculateEnergyChange(grid, newGrid);
+            double EnergyChange = 0;
+            foreach (EnergyUnitBase unit in EnergyUnits)
+            {
+                EnergyChange += unit.CalculateEnergyChange(grid,position,newState);
+            }
+            return EnergyChange;
         }
 
         public double CalculateEnergyChange(I2DGrid OldGrid, I2DGrid newGrid)
