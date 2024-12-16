@@ -38,10 +38,6 @@ namespace CellPottsLib.Logic
         public void ValidateMove(Move move, I2DGrid grid, IEnergyCalculator energyCalculator)
         {
             double energy = energyCalculator.CalculateEnergyChange(grid, move.Target, grid.GetPixel(move.Source));
-            //DEBUG
-            LogEntry log = new LogEntry("INFO", this, "new EnergyCalc:", new { VolumeEnergy = energy });
-            Logger.Log(log);
-            //DEBUG
             bool IsValid = false;
             if(energy <= 0) 
             { 

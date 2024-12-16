@@ -5,6 +5,7 @@ using CellPottsLib.Grid.CellTypes;
 using CellPottsLib.Logging;
 using CellPottsLib.Logic;
 using CellPottsLib.Logic.Units;
+using System.Runtime.CompilerServices;
 
 namespace CellLibTest
 {
@@ -12,25 +13,28 @@ namespace CellLibTest
     {
         static void Main(string[] args)
         {
-            Simulation sim = new Simulation(new IntVector2D(10, 10));
-            VolumeEnergyUnit veu = new VolumeEnergyUnit();
-            sim.AddLogicUnit(veu);
-            CellTypeDefinition ctd = new StandartType("Test", 1, 200);
-            ctd.TargetVolume = 10;
-            sim.Grid.DefineCellType(ctd);
-            sim.Grid.SetPixel(new IntVector2D(5, 5), 1);
-            sim.Grid.SetPixel(new IntVector2D(6, 4), 1);
+            Simulation sim = new Simulation(new IntVector2D(50, 20), "C:\\Users\\daniel.seeger\\source\\repos\\CellPottsLib\\CellPottsLib\\Logging\\Log.json");
+            sim.AddLogicUnit(new VolumeEnergyUnit());
+            sim.AddLogicUnit(new CircumferenceEnergyUnit());
+            sim.Grid.DefineCellType(new StandartType("test1", 1, 100) { TargetVolume = 20, TargetCircumference = 5 });
+            sim.Grid.SetPixel(10, 10, 1);
+            sim.Grid.SetPixel(10, 11, 2);
+            sim.Grid.SetPixel(10, 12, 3);
+            Logger.Clearlog();
 
             DrawGrid(sim.Grid);
-            Logger.SetLogPath("C:\\Users\\seege\\Source\\Repos\\DBstillSucksAss\\CellPottsLib\\CellPottsLib\\log.json");
-            Logger.Clearlog();
             Console.ReadKey();
 
-            for (int i = 0; i < 1000; i++)
+
+            for (int i = 0; i < 100; i++)
             {
                 Timestep(sim);
-                Thread.Sleep(10);
-                //Logger.Log($"Step {i} done.   Volume: {sim.Grid.GetCell(1).Volume}" , sim);
+                DrawGrid(sim.Grid);
+                foreach(Cell cell in sim.Grid.GetCells())
+                {
+                    LogEntry entry = new LogEntry() { Type = "DEBUG", Time = DateTime.Now, Message = $"Step {i}", Data = new { Circumference = cell.Circumference, Volume = cell.Volume }, Sender = "cell " +  cell.Identity.ToString() };
+                    Logger.Log(entry);
+                }
             }
             Logger.FinalizeLog();
             Console.ReadKey();
@@ -38,18 +42,16 @@ namespace CellLibTest
 
         private static void Timestep(Simulation sim)
         {
-            sim.Step(1);
-            DrawGrid(sim.Grid);
+            sim.Step();
         }
         private static void DrawGrid(I2DGrid grid)
         {
-            int[,] currentGrid = grid.CurrentGrid;
-            for (int x = 0; x < currentGrid.GetLength(0); x++)
+            for(int x = 0; x < grid.GridSize.x; x++)
             {
-                for (int y = 0; y < currentGrid.GetLength(1); y++)
+                for (int y = 0; y < grid.GridSize.y; y++)
                 {
                     Console.SetCursorPosition(x, y);
-                    Console.Write(currentGrid[x, y]);
+                    Console.Write(grid.GetPixel(x, y));
                 }
             }
         }

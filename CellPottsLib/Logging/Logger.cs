@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -12,7 +13,7 @@ namespace CellPottsLib.Logging
     public static class Logger
     {
         public static string Path { get { return Registry.LogPath; } set { SetLogPath(value); } }
-        static StreamWriter sw;
+        static StreamWriter? sw;
 
         public static void Log(LogEntry entry)
         {
@@ -22,9 +23,10 @@ namespace CellPottsLib.Logging
             {
                 System.IO.Path.ChangeExtension(Registry.LogPath, ".json");
                 using (File.Create(Path)) { }
-                sw.Close();
+                if (sw != null) { sw.Close(); }
                 sw = new StreamWriter(Path);
             }
+            
             string logtext = JsonSerializer.Serialize(entry);
             sw.WriteLine(logtext);
         }
@@ -33,7 +35,10 @@ namespace CellPottsLib.Logging
         {
             if (File.Exists(Path))
             {
-                sw.Close();
+                if (sw != null)
+                {
+                    sw.Close();
+                }
                 File.WriteAllText(Path, string.Empty);
                 SetLogPath(Path);
             }
@@ -49,7 +54,10 @@ namespace CellPottsLib.Logging
         public static void DisableLogging()
         {
             Registry.EnableLogging = false;
-            sw.Close();
+            if (sw != null)
+            {
+                sw.Close();
+            }
         }
 
         public static void EnableLogging()
@@ -59,12 +67,19 @@ namespace CellPottsLib.Logging
                 throw new Exception("No Logpath set. Logging cant be enabled");
             }
             Registry.EnableLogging = true;
+            if (sw != null)
+            {
+                sw.Close();
+            }
             sw = new StreamWriter(Path);
         }
 
         public static void FinalizeLog()
         {
-            sw.Close();
+            if (sw != null)
+            {
+                sw.Close();
+            }
 
             // Step 1: Read all lines from the log file
             var logLines = File.ReadAllLines(Path);

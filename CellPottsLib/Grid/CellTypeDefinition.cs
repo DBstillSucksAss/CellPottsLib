@@ -58,21 +58,21 @@ namespace CellPottsLib.Grid
             {
                 EnergyFactors = new Dictionary<string, double>();
             }
-            if (EnergyFactors.ContainsKey(FactorName))
+            if (EnergyFactors.ContainsKey(FactorName.ToLower()))
             {
-                EnergyFactors[FactorName] = FactorValue;
+                EnergyFactors[FactorName.ToLower()] = FactorValue;
             }
             else
             {
-                EnergyFactors.Add(FactorName, FactorValue);
+                EnergyFactors.Add(FactorName.ToLower(), FactorValue);
             }
         }
 
         public virtual double? GetEnergyFactor(string FactorName)
         {
-            if (EnergyFactors.ContainsKey(FactorName))
+            if (EnergyFactors.ContainsKey(FactorName.ToLower()))
             {
-                return EnergyFactors[FactorName];
+                return EnergyFactors[FactorName.ToLower()];
             }
             else
             {

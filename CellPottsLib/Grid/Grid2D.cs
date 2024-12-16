@@ -99,6 +99,10 @@ namespace CellPottsLib.Grid
             {
                 for(int y =0; y < yPos.Count; y++)
                 {
+                    if(xPos[x] == pos.x && yPos[y] == pos.y)
+                    {
+                        continue;
+                    }
                     if (!diagonalNeighbours)
                     {
                         if (xPos[x] - pos.x == -1 || xPos[x] - pos.x == 1)

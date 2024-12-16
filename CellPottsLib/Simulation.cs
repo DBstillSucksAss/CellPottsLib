@@ -1,5 +1,6 @@
 ﻿using CellPottsLib.DataStructs;
 using CellPottsLib.Grid;
+using CellPottsLib.Logging;
 using CellPottsLib.Logic;
 using System.Runtime.CompilerServices;
 
@@ -20,7 +21,7 @@ namespace CellPottsLib
             moveHandler = inj.GetMoveHandler();
             if(logpath != null)
             {
-                Registry.LogPath = logpath;
+                Logger.Path = logpath;
             }
         }
         public I2DGrid Grid { get {  return grid; } }

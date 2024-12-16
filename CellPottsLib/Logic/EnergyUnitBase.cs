@@ -17,7 +17,7 @@ namespace CellPottsLib.Logic
 
         public EnergyUnitBase(string iD)
         {
-            iD = ID;
+            ID = iD;
         }
 
 

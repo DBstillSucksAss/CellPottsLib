@@ -17,7 +17,7 @@ namespace CellPottsLib
         public static double VolumeFactor { get; set; } = 1.0f;
         public static double CircumferenceFactor { get; set; } = 1.0f;
         public static string LogPath { get; set; } = "";
-        public static bool LoggingEnabled { get { return LogPath.Equals(""); } } 
+        public static bool LoggingEnabled { get { return !LogPath.Equals(""); } } 
 
     }
 }
